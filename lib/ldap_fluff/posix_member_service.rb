@@ -21,7 +21,7 @@ class LdapFluff::Posix::MemberService < LdapFluff::GenericMemberService
     @ldap.search(
       :filter => user_group_filter(uid, user[:dn].first),
       :base => @group_base, :attributes => ["cn"]
-    ).map { |entry| entry[:cn][0] }
+    )&.map { |entry| entry[:cn][0] }
   end
 
   class UIDNotFoundException < LdapFluff::Error
